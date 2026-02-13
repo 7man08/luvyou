@@ -1,20 +1,25 @@
 import ImageCarousel from './ImageCarousel';
 
 export default function LovePage() {
-  const images = [
+  const topImages = [
     'https://images.pexels.com/photos/1024967/pexels-photo-1024967.jpeg?auto=compress&cs=tinysrgb&w=800',
     'https://images.pexels.com/photos/3394310/pexels-photo-3394310.jpeg?auto=compress&cs=tinysrgb&w=800',
     'https://images.pexels.com/photos/1024960/pexels-photo-1024960.jpeg?auto=compress&cs=tinysrgb&w=800',
     'https://images.pexels.com/photos/1024969/pexels-photo-1024969.jpeg?auto=compress&cs=tinysrgb&w=800',
+  ];
+
+  const bottomImages = [
     'https://images.pexels.com/photos/1024975/pexels-photo-1024975.jpeg?auto=compress&cs=tinysrgb&w=800',
     'https://images.pexels.com/photos/1024970/pexels-photo-1024970.jpeg?auto=compress&cs=tinysrgb&w=800',
+    'https://images.pexels.com/photos/1024968/pexels-photo-1024968.jpeg?auto=compress&cs=tinysrgb&w=800',
+    'https://images.pexels.com/photos/3394312/pexels-photo-3394312.jpeg?auto=compress&cs=tinysrgb&w=800',
   ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-100 via-rose-100 to-red-100 py-12 px-4">
       <div className="max-w-6xl mx-auto space-y-16">
         <div className="animate-fade-in">
-          <ImageCarousel images={images} />
+          <ImageCarousel images={topImages} />
         </div>
 
         <div className="text-center my-16 animate-typing">
@@ -23,6 +28,10 @@ export default function LovePage() {
               Thankkk you for being in my life lallouchtiiii 💞
             </h1>
           </div>
+        </div>
+
+        <div className="animate-fade-in-delay">
+          <ImageCarousel images={bottomImages} autoPlayDelay={4000} />
         </div>
 
         <footer className="text-center py-8">
