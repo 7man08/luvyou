@@ -8,7 +8,14 @@ export default function LovePage() {
     'https://drive.google.com/file/d/1BQNud590_gl-_Jf6Y_6OseiByXn0lBd4/view?usp=drive_link',
     'https://drive.google.com/file/d/1Zt5Mi9ugovZJ-K_ygfP7neZFXAA8zOwv/view?usp=drive_link',
   ];
-
+  // Helper to convert Drive view links to direct image links
+  const getDirectDriveLink = (url: string) => {
+    const idMatch = url.match(/\/d\/(.+?)\//);
+    if (idMatch && idMatch[1]) {
+      return `https://lh3.googleusercontent.com/d/${idMatch[1]}`;
+    }
+    return url;
+  };
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-100 via-rose-100 to-red-100 py-12 px-4">
       <div className="max-w-6xl mx-auto space-y-16">
@@ -22,7 +29,7 @@ export default function LovePage() {
           </div>
         </div>
         <div className="animate-fade-in">
-          <ImageCarousel images={images} />
+          <ImageCarousel images={images.map(getDirectDriveLink)} />
         </div>
 
         <footer className="text-center py-8">

@@ -17,11 +17,21 @@ export default function ImageCarousel({ images, autoPlayDelay = 3000 }: ImageCar
   
   const [currentIndex, setCurrentIndex] = useState(startParam);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [itemsToShow, setItemsToShow] = useState(3);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  const itemsToShow = 3;
+  useEffect(() => {
+    const handleResize = () => {
+      setItemsToShow(window.innerWidth < 768 ? 1 : 3);
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   // Calculate width for the track so all items fit side by side.
-  // Each item is 1/3 of the container width.
+  // Each item is 1/itemsToShow of the container width.
   const trackWidthPercent = (totalItems * 100) / itemsToShow; 
 
   const next = useCallback(() => {
@@ -73,18 +83,19 @@ export default function ImageCarousel({ images, autoPlayDelay = 3000 }: ImageCar
   const getTranslateX = () => {
     const itemWidthPercent = 100 / totalItems;
     // Shift so that currentIndex is centered.
-    return -((currentIndex - 1) * itemWidthPercent);
+    const startOffset = Math.floor(itemsToShow / 2);
+    return -((currentIndex - startOffset) * itemWidthPercent);
   };
 
   return (
     <div 
-      className="relative w-full max-w-6xl mx-auto py-8"
+      className="relative w-full max-w-6xl mx-auto py-8 touch-pan-y"
       onMouseEnter={stopAutoplay}
       onMouseLeave={startAutoplay}
     >
       <div className="relative overflow-hidden w-full"> 
         <div
-          className="flex h-96 items-center"
+          className="flex h-64 md:h-96 items-center"
           style={{
             width: `${trackWidthPercent}%`,
             transform: `translateX(${getTranslateX()}%)`,
@@ -100,7 +111,7 @@ export default function ImageCarousel({ images, autoPlayDelay = 3000 }: ImageCar
             return (
               <div 
                 key={index}
-                className="relative px-4 h-full flex items-center justify-center transition-all duration-500 box-border"
+                className="relative px-2 md:px-4 h-full flex items-center justify-center transition-all duration-500 box-border"
                 style={{
                     width: `${100 / totalItems}%`, 
                 }}
@@ -114,10 +125,10 @@ export default function ImageCarousel({ images, autoPlayDelay = 3000 }: ImageCar
                 <div 
                   className={`
                     relative rounded-3xl overflow-hidden shadow-2xl transition-all duration-500 ease-out w-full
-                    ${isActive ? 'scale-110 z-10 opacity-100 ring-4 ring-rose-300' : 'scale-90 z-0 opacity-60 hover:opacity-80'}
+                    ${isActive ? 'scale-100 md:scale-110 z-10 opacity-100 ring-2 md:ring-4 ring-rose-300' : 'scale-90 md:scale-90 z-0 opacity-60 hover:opacity-80'}
                   `}
                   style={{
-                    height: isActive ? '20rem' : '16rem',
+                    height: isActive ? (itemsToShow === 1 ? '16rem' : '20rem') : (itemsToShow === 1 ? '14rem' : '16rem'),
                   }}
                 >
                   <img
@@ -125,6 +136,7 @@ export default function ImageCarousel({ images, autoPlayDelay = 3000 }: ImageCar
                     alt={`Memory ${index}`}
                     className="w-full h-full object-cover transform transition-transform duration-700"
                     draggable={false}
+                    referrerPolicy="no-referrer"
                   />
                   <div className={`absolute inset-0 bg-gradient-to-t from-black/50 to-transparent ${isActive ? 'opacity-40' : 'opacity-20'}`} />
                 </div>
