@@ -2,20 +2,17 @@ import ImageCarousel from './ImageCarousel';
 
 export default function LovePage() {
   const images = [
-    'https://images.pexels.com/photos/1024967/pexels-photo-1024967.jpeg?auto=compress&cs=tinysrgb&w=800',
-    'https://images.pexels.com/photos/3394310/pexels-photo-3394310.jpeg?auto=compress&cs=tinysrgb&w=800',
-    'https://images.pexels.com/photos/1024960/pexels-photo-1024960.jpeg?auto=compress&cs=tinysrgb&w=800',
-    'https://images.pexels.com/photos/1024969/pexels-photo-1024969.jpeg?auto=compress&cs=tinysrgb&w=800',
-    'https://images.pexels.com/photos/1024975/pexels-photo-1024975.jpeg?auto=compress&cs=tinysrgb&w=800',
-    'https://images.pexels.com/photos/1024970/pexels-photo-1024970.jpeg?auto=compress&cs=tinysrgb&w=800',
+    'https://drive.google.com/file/d/1q_M2R-pUAg5SWXcvnpustNI6-yHBmQ3m/view?usp=drive_link',
+    'https://drive.google.com/file/d/1uAS7JAFGeL1vOJ-9OOESkJPcjV6J1o45/view?usp=drive_link',
+    'https://drive.google.com/file/d/1BJShWAWPYidDZVa0mXwsX9vf9Munueug/view?usp=drive_link',
+    'https://drive.google.com/file/d/1BQNud590_gl-_Jf6Y_6OseiByXn0lBd4/view?usp=drive_link',
+    'https://drive.google.com/file/d/1Zt5Mi9ugovZJ-K_ygfP7neZFXAA8zOwv/view?usp=drive_link',
   ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-100 via-rose-100 to-red-100 py-12 px-4">
       <div className="max-w-6xl mx-auto space-y-16">
-        <div className="animate-fade-in">
-          <ImageCarousel images={images} />
-        </div>
+        
 
         <div className="text-center my-16 animate-typing">
           <div className="inline-block p-8 bg-white/40 backdrop-blur-sm rounded-3xl shadow-2xl border-4 border-pink-300 glow-box">
@@ -23,6 +20,9 @@ export default function LovePage() {
               Thankkk you for being in my life lallouchtiiii 💞
             </h1>
           </div>
+        </div>
+        <div className="animate-fade-in">
+          <ImageCarousel images={images} />
         </div>
 
         <footer className="text-center py-8">
